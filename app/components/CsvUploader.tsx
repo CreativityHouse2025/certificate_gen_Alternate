@@ -57,7 +57,7 @@ export default function Home() {
                   type="text"
                   value={fullName}
                   onChange={(e) => setFullName(e.target.value)}
-                  className="w-full border-gray-300 rounded-md p-2"
+                  className="w-full border-gray-300 rounded-md p-2 text-black"
                   required
                 />
               </div>
@@ -69,7 +69,7 @@ export default function Home() {
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="w-full border-gray-300 rounded-md p-2"
+                  className="w-full border-black-300 rounded-md p-2 text-black"
                   required
                 />
               </div>

@@ -32,8 +32,9 @@ export default function Home() {
       document.body.removeChild(link);
 
     } catch (error) {
+      console.error('Certificate generation error:', error);
       alert('Error generating certificate. Please try again.');
-    } finally {
+    }  finally {
       setLoading(false);
     }
   };

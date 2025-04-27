@@ -7,7 +7,7 @@ import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient();
 
 
-async function createCertificate(fullName: string, email: string) {
+async function createCertificate(fullName: string) {
   const templatePath = path.join(process.cwd(), 'public', 'Certification.png');
   const templateBytes = fs.readFileSync(templatePath);
   
@@ -77,7 +77,7 @@ export async function POST(req: NextRequest) {
     }
 
     // Generate PDF
-    const pdfBytes = await createCertificate(fullName, email);
+    const pdfBytes = await createCertificate(fullName);
 
     // Save to Neon Database
     await prisma.certificate.create({
@@ -96,9 +96,9 @@ export async function POST(req: NextRequest) {
       }
     });
 
-  } catch (error: any) {
+  } catch (error:  Error | unknown) {
     console.error('Error:', error);
-    const errorMessage = error.code === 'P2002' 
+    const errorMessage = error instanceof Error && 'code' in error && error.code === 'P2002'
       ? 'Email already exists in our database'
       : 'Failed to generate certificate';
       
